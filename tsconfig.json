@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "target": "es3",
+    "rootDir": ".",
+    "lib": ["esnext", "dom"],
+    "types": ["jest", "node"],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "allowJs": false
+  },
+  "include": ["packages/**/*", "packages/*/__tests__"],
+  "exclude": ["node_modules"]
+}
