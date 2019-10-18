@@ -10,11 +10,7 @@ import { isUndef } from "../../utils";
  * @param {number} [end] 结束位置，同上
  * @returns {T[]} 返回一个新数组
  */
-export function slice<T>(
-  array: T[] = [],
-  start: number = 0,
-  end?: number
-): T[] {
+function slice<T>(array: T[] = [], start: number = 0, end?: number): T[] {
   let length = array.length;
   if (!length) return [];
 
@@ -39,3 +35,5 @@ export function slice<T>(
   }
   return result;
 }
+
+export default slice;

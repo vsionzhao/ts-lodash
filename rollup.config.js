@@ -1,7 +1,10 @@
+const fs = require('fs')
 const path = require('path')
+import resolve from 'rollup-plugin-node-resolve';
 const typescript = require('rollup-plugin-typescript2')
+import babel from 'rollup-plugin-babel';
 
-const { targets } = require('./scripts/utils')
+const targets = fs.readdirSync('packages')
 
 const pkg = require('./package.json')
 const formats = pkg.buildOptions.formats
@@ -16,11 +19,12 @@ const formatMap = {
 }
 
 targets.forEach(fileName => {
+    const isDir = fs.statSync(`packages/${fileName}`).isDirectory()
     formats.forEach(format => {
         const options = {
-            input: path.resolve(packagesDir, `./${fileName}/index.ts`),
+            input: path.resolve(packagesDir, isDir ? `./${fileName}/index.ts` : `./${fileName}`),
             output: {
-                file: path.resolve(packagesDir, `${fileName}/dist/${fileName}.${format}.prod.js`),
+                file: path.resolve(packagesDir, isDir ? `${fileName}/dist/${fileName}.${format}.prod.js` : `dist/${fileName}.${format}.prod.js`),
                 format: formatMap[format],
             }
         }
@@ -51,6 +55,11 @@ function createConfig({ output, name, input }, plugins = []) {
         output,
         plugins: [
             tsPlugin,
+            resolve(),
+            babel({
+                exclude: 'node_modules/**',
+                plugins: ['external-helpers']
+            }),
             ...plugins
         ]
     }
