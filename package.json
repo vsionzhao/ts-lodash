@@ -1,7 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "dev": "node scripts/dev.js",
+    "test": "jest"
   },
   "buildOptions": {
     "name": "ts-lodash",

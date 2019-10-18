@@ -1,1 +1,1 @@
-export function isArray() {}
+export { slice } from "./slice";

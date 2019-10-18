@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path')
 const typescript = require('rollup-plugin-typescript2')
 
@@ -25,7 +24,7 @@ targets.forEach(fileName => {
                 format: formatMap[format],
             }
         }
-        if (format === 'cjs') {
+        if (format === 'cjs' || format === 'esm') {
             packageConfigs.push(createConfig(options))
         } else if (format === 'global') {
             options.name = format;
